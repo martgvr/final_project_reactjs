@@ -1,0 +1,29 @@
+.itemdetail {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.image__container {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.text__container h3 {
+    font-size: 2em;
+}
+
+.text__container--description {
+    color: rgb(85, 85, 85);
+    margin-bottom: 20px;
+}
+
+.text__container--price {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

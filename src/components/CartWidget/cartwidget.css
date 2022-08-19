@@ -1,0 +1,10 @@
+.shoppingCart {
+    color: rgb(120, 120, 120);
+    transition: all 0.3s ease;
+}
+
+.shoppingCart:hover {
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

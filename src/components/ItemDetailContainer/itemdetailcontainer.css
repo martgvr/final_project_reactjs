@@ -1,0 +1,9 @@
+.itemdetail__container {
+    color: black;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.itemdetail__container h2 {
+    margin-bottom: 10px;
+}

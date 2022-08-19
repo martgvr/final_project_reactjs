@@ -1,0 +1,28 @@
+.itemlist__container {
+    color: rgb(0, 0, 0);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.itemlist__container h2 {
+    margin-bottom: 10px;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.itemlist {
+    display: flex;
+    margin-top: 20px;
+}
+
+.categories {
+    margin-right: 40px;
+    background-color: rgb(236, 236, 236);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
