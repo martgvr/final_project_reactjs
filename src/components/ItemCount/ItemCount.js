@@ -13,7 +13,6 @@ function ItemCount( { initial, stock, color, onAdd, text }) {
     const handleAdd = () => (count < stock) && setCount(count + 1);
     const handleRemove = () => (count > initial) && setCount(count - 1);
 
-    let backStock = (stock > 0) ? '' : 'grey';
 
   return (
     <>
@@ -34,7 +33,7 @@ function ItemCount( { initial, stock, color, onAdd, text }) {
                 </Tooltip>
             </div>
 
-            <Button variant='contained' size="small" onClick={() => onAdd(count)} style={{backgroundColor: backStock}}>{text}</Button>
+            <Button variant='contained' size="small" onClick={() => onAdd(count)}>{text}</Button>
         </div>
     </>
   )

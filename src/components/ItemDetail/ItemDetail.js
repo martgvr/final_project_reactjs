@@ -1,6 +1,6 @@
 import './itemdetail.css'
 // import { Link } from "react-router-dom";
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import ItemCount from '../ItemCount/ItemCount';
 
 // Importo useContext y cartContext
@@ -10,7 +10,7 @@ import { cartContext } from '../../context/cartContext'
 function ItemDetail({ id, name, price, stock, img, rating, description }) {
 
   // Desestructuro el context
-  const { addToCart } = useContext(cartContext); 
+  const { addToCart, removeItem, clearCart } = useContext(cartContext); 
 
   function handleAdd(quantity) {
     const itemToCart = { id, name, price, img, rating, description }
@@ -27,10 +27,8 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
         <p className='text__container--rating'>{rating} estrellas</p>
 
         <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'}/>
-
-        {/* { quantity === 0 && 
-                            <Link to={`/cart`}><Button variant='contained' size="small">Ir al carrito</Button></Link>
-        } */}
+        <Button variant='contained' size="small" onClick={() => removeItem(id)}>Borrar del carrito</Button>
+        <Button variant='contained' size="small" onClick={() => clearCart()}>Vaciar carrito</Button>
 
       </div>
     </div>
