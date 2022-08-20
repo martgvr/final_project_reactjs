@@ -8,7 +8,7 @@ export function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
   const cartCopy = [...cart];
 
-  const isInCart = (id) => cartCopy.some(item => item.id === id);
+  const isInCart = (id) => cart.some(item => item.id === id);
 
   const addToCart = (itemToCart, quantity) => {
     if (!isInCart(itemToCart.id)) {
