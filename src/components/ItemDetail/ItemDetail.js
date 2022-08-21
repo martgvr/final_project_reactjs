@@ -1,13 +1,14 @@
 import './itemdetail.css'
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ItemCount from '../ItemCount/ItemCount';
 
 // Importo useContext y cartContext
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { cartContext } from '../../context/cartContext'
 
 function ItemDetail({ id, name, price, stock, img, rating, description }) {
+  const [showCartButton, setShowCartButton] = useState(null);
 
   // Desestructuro el context
   const { addToCart, removeItem, clearCart } = useContext(cartContext); 
@@ -15,6 +16,7 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
   function handleAdd(quantity) {
     const itemToCart = { id, name, price, img, rating, description }
     addToCart(itemToCart, quantity);
+    setShowCartButton(1);
   }
 
   return (
@@ -26,7 +28,12 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
         <p className='text__container--price'>$ {price}</p>
         <p className='text__container--rating'>{rating} estrellas</p>
 
-        <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'}/>
+        {
+          showCartButton == 1 ? 
+          <Link to="/cart"><Button variant='contained' size="small" >Ir al carrito</Button></Link> :
+          <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'}/>
+        }
+
         <Button variant='contained' size="small" onClick={() => removeItem(id)}>Borrar del carrito</Button>
         <Button variant='contained' size="small" onClick={() => clearCart()}>Vaciar carrito</Button>
 
