@@ -14,11 +14,10 @@ export function CartContextProvider({ children }) {
     if (!isInCart(itemToCart.id)) {
       cartCopy.push( {...itemToCart, quantity: quantity} );
       setCart(cartCopy);
-      console.log(`Total: ${quantity} unidades de ${itemToCart.name}`);
     } else {
       const itemIndex = cartCopy.findIndex(item => item.id === itemToCart.id);
       cartCopy[itemIndex].quantity += quantity;
-      console.log(`Total: ${cartCopy[itemIndex].quantity} unidades de ${itemToCart.name}`);
+      setCart(cartCopy);
     }
   }
 
@@ -29,9 +28,6 @@ export function CartContextProvider({ children }) {
       const itemIndex = cartCopy.findIndex((item) => item.id === id);
       cartCopy.splice(itemIndex, 1);
       setCart(cartCopy);
-      console.log('Item eliminado');
-    } else {
-      console.log('El item no se encuentra en el carrito!');
     }
   };
 

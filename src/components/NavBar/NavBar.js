@@ -12,7 +12,7 @@ function NavBar() {
                 <li className="menu__item">Home</li>
                 <Link to="/"><li className="menu__item active">Productos</li></Link>
                 <li className="menu__item">Contacto</li>
-                <CartWidget />
+                <Link to="/cart"><CartWidget /></Link>
             </ul>
         </nav>
     )

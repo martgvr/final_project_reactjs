@@ -11,7 +11,7 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
   const [showCartButton, setShowCartButton] = useState(null);
 
   // Desestructuro el context
-  const { addToCart, removeItem, clearCart } = useContext(cartContext); 
+  const { addToCart } = useContext(cartContext);
 
   function handleAdd(quantity) {
     const itemToCart = { id, name, price, img, rating, description }
@@ -21,7 +21,7 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
 
   return (
     <div className='itemdetail'>
-      <div className='image__container' style={{backgroundImage: `url(${img})`}}></div>
+      <div className='image__container' style={{ backgroundImage: `url(${img})` }}></div>
       <div className='text__container'>
         <h3>{name}</h3>
         <p className='text__container--description'>{description}</p>
@@ -29,13 +29,10 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
         <p className='text__container--rating'>{rating} estrellas</p>
 
         {
-          showCartButton == 1 ? 
-          <Link to="/cart"><Button variant='contained' size="small" >Ir al carrito</Button></Link> :
-          <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'}/>
+          showCartButton === 1 ?
+            <Link to="/cart"><Button variant='contained' size="small" >Ir al carrito</Button></Link> :
+            <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'} />
         }
-
-        <Button variant='contained' size="small" onClick={() => removeItem(id)}>Borrar del carrito</Button>
-        <Button variant='contained' size="small" onClick={() => clearCart()}>Vaciar carrito</Button>
 
       </div>
     </div>
