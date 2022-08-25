@@ -4,7 +4,7 @@ import ItemList from '../ItemList/ItemList';
 import { Link, useParams } from 'react-router-dom';
 
 import firestoreDB from '../../services/firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 function getProducts() {
   return new Promise((resolve) => {
@@ -18,19 +18,29 @@ function getProducts() {
   })
 }
 
+function getByCategory(category) {
+  return new Promise((resolve) => {
+    const productsCollection = collection(firestoreDB, 'productos');
+    const q = query(productsCollection, where('category', '==', category))
+    getDocs(q).then(snapshot => {
+      const docsData = snapshot.docs.map(doc => {
+        return { ...doc.data(), key: doc.id }
+      });
+      resolve(docsData);
+    })
+  })
+}
+
 function ItemListContainer({ title }) {
   const [data, setData] = useState([]);
   const category = useParams().category;
 
   useEffect(() => {
-    getProducts().then((res) => {
-      if (category !== undefined) {
-        let getProduct = res.filter(element => element.category === category);
-        setData(getProduct);
-      } else {
-        setData(res);
-      }
-    });
+    if (category == undefined) {
+      getProducts().then((res) => setData(res))
+    } else {
+      getByCategory(category).then((res) => setData(res))
+    }
   }, [category])
   
   return (
