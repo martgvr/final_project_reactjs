@@ -11,13 +11,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
-
         <CartContextProvider>
           <NavBar />
           <div className="main__container">
             <Routes>
               <Route path='/' element={<ItemListContainer title={'Listado de productos'} />} />
-              <Route path='/detail/:id' element={<ItemDetailContainer title={'Detalle de producto'} />} />
+              <Route path='/detail/:key' element={<ItemDetailContainer title={'Detalle de producto'} />} />
               <Route path='/category/:category' element={<ItemListContainer title={'Listado de productos'} />} />
               <Route path='/cart/' element={<Cart />} />
               <Route path='*' element={<h1>Error 404. Nada encontrado</h1>} />
@@ -25,7 +24,6 @@ function App() {
           </div>
           <Footer />
         </CartContextProvider>
-
       </BrowserRouter>
     </>
   );

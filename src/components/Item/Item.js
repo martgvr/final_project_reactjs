@@ -7,7 +7,7 @@ import './item.css';
 
 import { Link } from "react-router-dom";
 
-function Item({ name, type, price, stock, img, id }) {
+function Item({ name, type, price, stock, img, id}) {
   return (
     <Link to={`/detail/${id}`}>
       <Card sx={{ maxWidth: 345 }} className='cardHover'>

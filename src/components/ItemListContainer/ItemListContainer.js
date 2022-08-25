@@ -1,12 +1,20 @@
 import './itemlistcontainer.css';
 import { useEffect, useState } from 'react';
-import itemsData from '../../data/data.js';
 import ItemList from '../ItemList/ItemList';
 import { Link, useParams } from 'react-router-dom';
 
+import firestoreDB from '../../services/firebase';
+import { getDocs, collection } from 'firebase/firestore';
+
 function getProducts() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(itemsData), 1500);
+    const productsCollection = collection(firestoreDB, 'productos');
+    getDocs(productsCollection).then(snapshot => {
+      const docsData = snapshot.docs.map(doc => {
+        return { ...doc.data(), key: doc.id }
+      });
+      resolve(docsData);
+    })
   })
 }
 
