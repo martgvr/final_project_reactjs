@@ -5,5 +5,6 @@ La tienda se encuentra realizada con React utilizando como base <b>create-react-
 
 ## What's next?
 - Incluir alert al sumar artículos al carrito
-- Agregar secciones faltantes en la página
 - Mejorar estética general
+- Usar NavLink en la navbar
+- Agregar secciones faltantes en la página
