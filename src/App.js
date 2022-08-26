@@ -2,6 +2,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+import Checkout from './components/Checkout/Checkout'
 import Cart from './components/Cart/Cart';
 import Footer from './components/Footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -19,6 +20,7 @@ function App() {
               <Route path='/detail/:key' element={<ItemDetailContainer title={'Detalle de producto'} />} />
               <Route path='/category/:category' element={<ItemListContainer title={'Listado de productos'} />} />
               <Route path='/cart/' element={<Cart />} />
+              <Route path='/checkout/' element={<Checkout />} />
               <Route path='*' element={<h1>Error 404. Nada encontrado</h1>} />
             </Routes>
           </div>

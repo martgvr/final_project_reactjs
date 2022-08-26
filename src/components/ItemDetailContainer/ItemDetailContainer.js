@@ -1,36 +1,22 @@
-import React from 'react'
-import './itemdetailcontainer.css'
+import React, { useEffect, useState } from 'react'
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
+import './itemdetailcontainer.css'
 
-import firestoreDB from '../../services/firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
+import { getByKey } from '../../services/firebase';
 
 function ItemDetailContainer({ title }) {
     const [data, setData] = useState([]);
     const { key } = useParams();
 
-    function getProducts() {
-        return new Promise((resolve) => {
-            const productsCollection = collection(firestoreDB, 'products');
-            getDocs(productsCollection).then(snapshot => {
-              const docsData = snapshot.docs.map(doc => {
-                return { ...doc.data(), key: doc.id }
-              });
-              let itemRequested = docsData.find((elemento) => elemento.key === key);
-              resolve(itemRequested);
-            })
-        });
-    }
-
     useEffect(() => {
-        getProducts().then((res) => {
-            setData(res);
-        });
+        getByKey(key).then((res) => setData(res));
     }, [])
 
-    return (
+    return (data.length == 0) ?
+        <Loading />
+        :
         <div className='itemdetail__container'>
             <div>
                 <h2>{title}</h2>
@@ -38,8 +24,7 @@ function ItemDetailContainer({ title }) {
             <div>
                 <ItemDetail id={data.key} key={data.key} name={data.name} price={data.price} stock={data.stock} img={data.img} rating={data.rating} description={data.description} />
             </div>
-        </div>
-    );
+        </div>;
 }
 
 export default ItemDetailContainer

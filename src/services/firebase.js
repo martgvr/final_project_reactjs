@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMuUiSIvDwddGSXQssL8C_0YDCxQm1UTk",
@@ -14,3 +14,32 @@ const app = initializeApp(firebaseConfig);
 const firestoreDB = getFirestore(app);
 
 export default firestoreDB;
+
+export function getData(category) {
+  return new Promise((resolve) => {
+    // Referencio a la coleccion
+    const collectionRef = collection(firestoreDB, 'products');
+    // Creo una referencia a utilizar como param en getDocs
+    const ref = (category == null) ? collectionRef : query(collectionRef, where('category', '==', category));
+
+    getDocs(ref).then(snapshot => {
+      const docsData = snapshot.docs.map(doc => {
+        return { ...doc.data(), key: doc.id }
+      });
+      resolve(docsData);
+    })
+  })
+}
+
+export function getByKey(key) {
+  return new Promise((resolve) => {
+      const productsCollection = collection(firestoreDB, 'products');
+      getDocs(productsCollection).then(snapshot => {
+        const docsData = snapshot.docs.map(doc => {
+          return { ...doc.data(), key: doc.id }
+        });
+        let itemRequested = docsData.find((elemento) => elemento.key === key);
+        resolve(itemRequested);
+      })
+  });
+}

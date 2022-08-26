@@ -14,6 +14,7 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
   const { addToCart } = useContext(cartContext);
 
   function handleAdd(quantity) {
+    // AGREGAR TOASTY!!!
     const itemToCart = { id, name, price, img, rating, description }
     addToCart(itemToCart, quantity);
     setShowCartButton(1);

@@ -98,9 +98,9 @@ function Cart() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" color="success">
-                  Pagar
-                </Button>
+              <Link to="/checkout">
+                <Button variant="contained" color="success">Pagar</Button>
+              </Link>
               </CardActions>
             </Card>
           </div>
