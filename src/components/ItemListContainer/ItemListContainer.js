@@ -8,7 +8,7 @@ import { getDocs, collection, query, where } from 'firebase/firestore';
 
 function getProducts() {
   return new Promise((resolve) => {
-    const productsCollection = collection(firestoreDB, 'productos');
+    const productsCollection = collection(firestoreDB, 'products');
     getDocs(productsCollection).then(snapshot => {
       const docsData = snapshot.docs.map(doc => {
         return { ...doc.data(), key: doc.id }
@@ -20,7 +20,7 @@ function getProducts() {
 
 function getByCategory(category) {
   return new Promise((resolve) => {
-    const productsCollection = collection(firestoreDB, 'productos');
+    const productsCollection = collection(firestoreDB, 'products');
     const q = query(productsCollection, where('category', '==', category))
     getDocs(q).then(snapshot => {
       const docsData = snapshot.docs.map(doc => {

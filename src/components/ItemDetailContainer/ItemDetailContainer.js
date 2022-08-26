@@ -13,7 +13,7 @@ function ItemDetailContainer({ title }) {
 
     function getProducts() {
         return new Promise((resolve) => {
-            const productsCollection = collection(firestoreDB, 'productos');
+            const productsCollection = collection(firestoreDB, 'products');
             getDocs(productsCollection).then(snapshot => {
               const docsData = snapshot.docs.map(doc => {
                 return { ...doc.data(), key: doc.id }
