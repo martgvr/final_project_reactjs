@@ -10,11 +10,25 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
 import { cartContext } from '../../context/cartContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 function Checkout() {
+  const [formData, setFormData] = useState({ name: '', telephone: '', mail: '', address: '' });
   const { cart } = useContext(cartContext);
-  console.log(cart);
+
+  const handleSubmit = () => {
+    console.log(formData);
+    setFormData({ name: '', telephone: '', mail: '', address: '' });
+  }
+  
+  function onChangeHandle(evt) {
+    const value = evt.target.value;
+    const name = evt.target.name;
+
+    let formDataCopy = { ...formData };
+    formDataCopy[name] = value;
+    setFormData(formDataCopy);
+  }
 
   return (
     <div className='checkout__container'>
@@ -25,17 +39,18 @@ function Checkout() {
 
       <div className='checkout__form'>
         <div className='checkout__form--fields'>
-          <TextField required id="outlined-required" label="Nombre completo" defaultValue="" fullWidth />
-          <TextField required id="outlined-required" label="Teléfono" defaultValue="" fullWidth />
-          <TextField required id="outlined-required" label="Mail" defaultValue="" fullWidth />
-          <TextField required id="outlined-required" label="Dirección" defaultValue="" fullWidth />
-          <Button variant="contained" color="success">Finalizar compra</Button>
+          <TextField required id="outlined-required" label="Nombre completo" fullWidth onChange={  onChangeHandle } name='name' value={formData.name} />
+          <TextField required id="outlined-required" label="Teléfono" fullWidth onChange={  onChangeHandle } name='telephone' value={formData.telephone} />
+          <TextField required id="outlined-required" label="Mail" fullWidth onChange={  onChangeHandle } name='mail' value={formData.mail} />
+          <TextField required id="outlined-required" label="Dirección" fullWidth onChange={  onChangeHandle } name='address' value={formData.address} />
+          <Button variant="contained" color="success" onClick={ () => handleSubmit() }>Finalizar compra</Button>
         </div>
 
         <div className='checkout__form--cart'>
           <h3>Artículos a pagar:</h3>
 
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', }} >
+
             {
               cart.map((item) => {
                 const secondaryText = `${item.quantity} ${((item.quantity > 1) ? 'unidades' : 'unidad')}`;
@@ -48,6 +63,7 @@ function Checkout() {
                 </ListItem>)
               })
             }
+
           </List>
         </div>
       </div>
