@@ -1,5 +1,7 @@
 import React from 'react'
 import './checkout.css'
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
@@ -24,6 +26,10 @@ function Checkout() {
     cart.forEach(item => total += (item.price * item.quantity));
 
     const dataToWrite = { buyer: { ...formData }, items: [...cart], total: total }
+    
+    alertify.alert('Alert Title', 'Alert Message!', function(){ 
+      alertify.success('Ok'); 
+    });
 
     clearCart(); // Limpia el carrito
     setFormData({ name: '', telephone: '', mail: '', address: '' }); // Resetea los campos

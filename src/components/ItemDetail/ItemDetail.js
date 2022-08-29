@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ItemCount from '../ItemCount/ItemCount';
 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+
 // Importo useContext y cartContext
 import React, { useContext, useState } from 'react'
 import { cartContext } from '../../context/cartContext'
@@ -14,7 +17,7 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
   const { addToCart } = useContext(cartContext);
 
   function handleAdd(quantity) {
-    // AGREGAR TOASTY!!!
+    alertify.success('Item agregado al carrito'); 
     const itemToCart = { id, name, price, img, rating, description }
     addToCart(itemToCart, quantity);
     setShowCartButton(1);
