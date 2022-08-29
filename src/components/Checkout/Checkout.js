@@ -11,7 +11,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react'
 import { cartContext } from '../../context/cartContext'
 import { addToDatabase } from '../../services/firebase'
@@ -20,20 +20,24 @@ function Checkout() {
   const [formData, setFormData] = useState({ name: '', telephone: '', mail: '', address: '' });
   const { cart, clearCart } = useContext(cartContext);
   let status = cart.length == 0 ? true : false;
+  let navigate = useNavigate();
 
   function handleSubmit() {
     let total = 0;
     cart.forEach(item => total += (item.price * item.quantity));
-
     const dataToWrite = { buyer: { ...formData }, items: [...cart], total: total }
-    
-    alertify.alert('Alert Title', 'Alert Message!', function(){ 
-      alertify.success('Ok'); 
-    });
 
-    clearCart(); // Limpia el carrito
-    setFormData({ name: '', telephone: '', mail: '', address: '' }); // Resetea los campos
-    addToDatabase({ dataToWrite }); // Llama a la función addToDatabase
+    let readyToGo = null;
+    for (const property in formData) { if (formData[property] == "") { readyToGo = 0 } }
+
+    if (readyToGo == 0) {
+      alertify.error('Por favor complete todos los campos');
+    } else {
+      alertify.alert('Gracias por su compra!', 'El id de su compra es el siguiente:', () => navigate("../", { replace: true }));
+      clearCart(); // Limpia el carrito
+      setFormData({ name: '', telephone: '', mail: '', address: '' }); // Resetea los campos
+      addToDatabase({ dataToWrite }); // Llama a la función addToDatabase
+    }
   }
 
   function onChangeHandle(evt) {
@@ -54,7 +58,7 @@ function Checkout() {
 
       <div className='checkout__form'>
         <div className='checkout__form--fields'>
-          <TextField disabled={status} id="outlined-required" label="Nombre completo" fullWidth onChange={onChangeHandle} name='name' value={formData.name} />
+          <TextField disabled={status} required id="outlined-required" label="Nombre completo" fullWidth onChange={onChangeHandle} name='name' value={formData.name} />
           <TextField disabled={status} required id="outlined-required" label="Teléfono" fullWidth onChange={onChangeHandle} name='telephone' value={formData.telephone} />
           <TextField disabled={status} required id="outlined-required" label="Mail" fullWidth onChange={onChangeHandle} name='mail' value={formData.mail} />
           <TextField disabled={status} required id="outlined-required" label="Dirección" fullWidth onChange={onChangeHandle} name='address' value={formData.address} />
@@ -78,7 +82,8 @@ function Checkout() {
             }
           </List>
 
-          {(status == true) &&
+          {
+            (status == true) &&
             <>
               <p>No hay articulos en el carrito</p>
               <Link to="/"><Button variant='contained' size="small" >Ir a los productos</Button></Link>

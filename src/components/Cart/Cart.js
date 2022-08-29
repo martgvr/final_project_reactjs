@@ -13,19 +13,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
+  [`&.${tableCellClasses.head}`]: { backgroundColor: theme.palette.common.black, color: theme.palette.common.white, },
   [`&.${tableCellClasses.body}`]: { fontSize: 14, },
 }));
 
@@ -36,6 +35,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function Cart() {
   const { cart, removeItem, clearCart } = useContext(cartContext);
+
+  function handleRemove(itemID) {
+    removeItem(itemID)
+    alertify.error('Item eliminado del carrito'); 
+  }
 
   let subtotal = 0;
   cart.map(item => subtotal += (item.price * item.quantity));
@@ -78,7 +82,7 @@ function Cart() {
                       <StyledTableCell align="right">{item.quantity}</StyledTableCell>
                       <StyledTableCell align="right">{item.price * item.quantity}</StyledTableCell>
                       <StyledTableCell align="right">
-                        <IconButton aria-label="upload picture" component="label" onClick={() => removeItem(item.id)}>
+                        <IconButton aria-label="upload picture" component="label" onClick={() => handleRemove(item.id)}>
                           <DeleteIcon />
                         </IconButton>
                       </StyledTableCell>
