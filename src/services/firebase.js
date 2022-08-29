@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore'
+import alertify from 'alertifyjs';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMuUiSIvDwddGSXQssL8C_0YDCxQm1UTk",
@@ -45,8 +46,7 @@ export function getByKey(key) {
 }
 
 export async function addToDatabase(orderData) {
-  console.log(orderData);
-  
   const ordersCollection = collection(firestoreDB, 'orders');
-  // const respuesta = await addDoc(ordersCollection, orderData);
+  const docRef = await addDoc(ordersCollection, orderData);
+  alertify.alert('Gracias por su compra!', 'El id de su compra es: ' + docRef.id);
 }

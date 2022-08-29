@@ -1,9 +1,11 @@
-# Proyecto de tienda con ReactJS
+# E-commerce de Vincit Fitness Wear
 
 Todas las entregas de los desafíos serán pusheados en este repositorio.<br>
-La tienda se encuentra realizada con React utilizando como base <b>create-react-app</b> y <b>Material UI</b> para la parte visual y sus componentes estilizados.
+La tienda se encuentra realizada con ReactJS utilizando como base <b>create-react-app</b> y <b>Material UI</b> para la parte visual y sus componentes estilizados.
+
+### Otras dependencias utilizadas:
+- Firebase como base de datos
+- AlertifyJS para las alertas
 
 ## What's next?
-- Mejorar estética general.
 - Usar NavLink en la navbar.
-- Agregar secciones faltantes en la página.

@@ -19,24 +19,32 @@ import { addToDatabase } from '../../services/firebase'
 function Checkout() {
   const [formData, setFormData] = useState({ name: '', telephone: '', mail: '', address: '' });
   const { cart, clearCart } = useContext(cartContext);
-  let status = cart.length == 0 ? true : false;
+
+  let status = cart.length === 0 ? true : false;
   let navigate = useNavigate();
 
   function handleSubmit() {
     let total = 0;
     cart.forEach(item => total += (item.price * item.quantity));
-    const dataToWrite = { buyer: { ...formData }, items: [...cart], total: total }
 
-    let readyToGo = null;
-    for (const property in formData) { if (formData[property] == "") { readyToGo = 0 } }
+    const dataToWrite = { 
+      buyer: { ...formData }, 
+      items: [...cart], 
+      total: total, 
+      date: new Date()
+    }
 
-    if (readyToGo == 0) {
+    // Checkeo que los input estén completos
+    let readyToWrite = null;
+    for (const property in formData) { if (formData[property] === "") { readyToWrite = 0 } }
+
+    if (readyToWrite === 0) {
       alertify.error('Por favor complete todos los campos');
     } else {
-      alertify.alert('Gracias por su compra!', 'El id de su compra es el siguiente:', () => navigate("../", { replace: true }));
       clearCart(); // Limpia el carrito
       setFormData({ name: '', telephone: '', mail: '', address: '' }); // Resetea los campos
       addToDatabase({ dataToWrite }); // Llama a la función addToDatabase
+      navigate("../", { replace: true });
     }
   }
 
@@ -81,15 +89,13 @@ function Checkout() {
               })
             }
           </List>
-
           {
-            (status == true) &&
+            (status === true) &&
             <>
               <p>No hay articulos en el carrito</p>
               <Link to="/"><Button variant='contained' size="small" >Ir a los productos</Button></Link>
             </>
           }
-
         </div>
       </div>
     </div>
