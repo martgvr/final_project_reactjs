@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMuUiSIvDwddGSXQssL8C_0YDCxQm1UTk",
@@ -42,4 +42,11 @@ export function getByKey(key) {
         resolve(itemRequested);
       })
   });
+}
+
+export async function addToDatabase(orderData) {
+  console.log(orderData);
+  
+  const ordersCollection = collection(firestoreDB, 'orders');
+  // const respuesta = await addDoc(ordersCollection, orderData);
 }

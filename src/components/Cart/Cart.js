@@ -38,7 +38,7 @@ function Cart() {
   const { cart, removeItem, clearCart } = useContext(cartContext);
 
   let subtotal = 0;
-  cart.map(item => subtotal += (item.price * item.quantity))
+  cart.map(item => subtotal += (item.price * item.quantity));
 
   return (
     <div className='cartcontainer'>
