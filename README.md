@@ -6,8 +6,8 @@ La tienda se encuentra realizada con ReactJS utilizando como base <b>create-reac
 ### Otras dependencias utilizadas:
 - Firebase como base de datos
 - AlertifyJS para las alertas
+- Formik para el manejo de forms.
 
 ## What's next?
-- Mejorar la validación de los inputs del checkout. (Probar Formik)
 - Usar NavLink en la navbar.
 - Poner logo en jpg en el readme como header

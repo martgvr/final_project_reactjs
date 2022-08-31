@@ -9,6 +9,7 @@
     "@mui/material": "^5.9.1",
     "alertifyjs": "^1.13.1",
     "firebase": "^9.9.3",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
