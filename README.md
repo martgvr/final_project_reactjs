@@ -8,8 +8,6 @@ La tienda se encuentra realizada con ReactJS utilizando como base <b>create-reac
 - AlertifyJS para las alertas
 
 ## What's next?
-- Usar NavLink en la navbar.
 - Mejorar la validación de los inputs del checkout. (Probar Formik)
-- Mejorar estética a la misma de la plantilla
-- Agregar breadcrumb
+- Usar NavLink en la navbar.
 - Poner logo en jpg en el readme como header

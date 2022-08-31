@@ -10,6 +10,10 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react'
@@ -23,14 +27,20 @@ function Checkout() {
   let status = cart.length === 0 ? true : false;
   let navigate = useNavigate();
 
+  const breadcrumbs = [
+    <Link to='/ ' underline="hover" key="1" color="inherit" href="/" >Tienda</Link>,
+    <Link to='/cart' underline="hover" key="1" color="inherit" href="/" >Carrito</Link>,
+    <Typography key="3" color="text.primary">Checkout</Typography>,
+  ];
+
   function handleSubmit() {
     let total = 0;
     cart.forEach(item => total += (item.price * item.quantity));
 
-    const dataToWrite = { 
-      buyer: { ...formData }, 
-      items: [...cart], 
-      total: total, 
+    const dataToWrite = {
+      buyer: { ...formData },
+      items: [...cart],
+      total: total,
       date: new Date()
     }
 
@@ -61,6 +71,11 @@ function Checkout() {
     <div className='checkout__container'>
       <div className='checkout__title'>
         <h1>Checkout</h1>
+        <Stack spacing={2} style={{ paddingBottom: '20px' }}>
+          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            {breadcrumbs}
+          </Breadcrumbs>
+        </Stack>
         <p>Por favor complete los datos para finalizar la compra.</p>
       </div>
 
@@ -75,27 +90,29 @@ function Checkout() {
 
         <div className='checkout__form--cart'>
           <h3>Artículos a pagar:</h3>
-          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', }} >
-            {
-              cart.map((item) => {
-                const secondaryText = `${item.quantity} ${((item.quantity > 1) ? 'unidades' : 'unidad')}`;
-                return (
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar alt={item.name} src={item.img} />
-                    </ListItemAvatar>
-                    <ListItemText primary={item.name} secondary={secondaryText} />
-                  </ListItem>)
-              })
-            }
-          </List>
-          {
-            (status === true) &&
+
+          {cart.length > 0 ?
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', }} >
+              {
+                cart.map((item) => {
+                  const secondaryText = `${item.quantity} ${((item.quantity > 1) ? 'unidades' : 'unidad')}`;
+                  return (
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar alt={item.name} src={item.img} />
+                      </ListItemAvatar>
+                      <ListItemText primary={item.name} secondary={secondaryText} />
+                    </ListItem>)
+                })
+              }
+            </List>
+            :
             <>
               <p>No hay articulos en el carrito</p>
               <Link to="/"><Button variant='contained' size="small" >Ir a los productos</Button></Link>
             </>
           }
+
         </div>
       </div>
     </div>

@@ -16,6 +16,10 @@ import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
@@ -36,9 +40,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function Cart() {
   const { cart, removeItem, clearCart } = useContext(cartContext);
 
+  const breadcrumbs = [
+    <Link to='/ ' underline="hover" key="1" color="inherit" href="/" >Tienda</Link>,
+    <Typography key="3" color="text.primary">Carrito</Typography>,
+  ];
+
   function handleRemove(itemID) {
     removeItem(itemID)
-    alertify.error('Item eliminado del carrito'); 
+    alertify.error('Item eliminado del carrito');
   }
 
   let subtotal = 0;
@@ -46,7 +55,14 @@ function Cart() {
 
   return (
     <div className='cartcontainer'>
-      <div className='cart__title'>Carrito</div>
+      <div className='cart__title'>
+        <h3>Carrito</h3>
+        <Stack spacing={2} style={{ paddingBottom: '20px' }}>
+          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            {breadcrumbs}
+          </Breadcrumbs>
+        </Stack>
+      </div>
       {cart.length > 0 ?
 
         <div className='cart__columns'>
@@ -102,9 +118,9 @@ function Cart() {
                 </div>
               </CardContent>
               <CardActions>
-              <Link to="/checkout">
-                <Button variant="contained" color="success">Pagar</Button>
-              </Link>
+                <Link to="/checkout">
+                  <Button variant="contained" color="success">Pagar</Button>
+                </Link>
               </CardActions>
             </Card>
           </div>

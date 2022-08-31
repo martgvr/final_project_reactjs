@@ -1,7 +1,8 @@
 import './itemdetail.css'
 import { Link } from "react-router-dom";
-import Button from '@mui/material/Button';
 import ItemCount from '../ItemCount/ItemCount';
+import Button from '@mui/material/Button';
+import Rating from '@mui/material/Rating';
 
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
@@ -29,12 +30,13 @@ function ItemDetail({ id, name, price, stock, img, rating, description }) {
       <div className='text__container'>
         <h3>{name}</h3>
         <p className='text__container--description'>{description}</p>
+        <Rating className='text__container--rating' name="read-only" value={rating} readOnly />
         <p className='text__container--price'>$ {price}</p>
-        <p className='text__container--rating'>{rating} estrellas</p>
 
         {
           showCartButton === 1 ?
-            <Link to="/cart"><Button variant='contained' size="small" >Ir al carrito</Button></Link> :
+            <><Link to="/"><Button variant='contained' size="small" style={{marginRight: '10px'}}>Seguir comprando</Button></Link>
+            <Link to="/cart"><Button variant='contained' size="small" >Ir al carrito</Button></Link></>:
             <ItemCount initial={1} stock={stock} color={'#000'} onAdd={handleAdd} text={'Agregar al carrito'} />
         }
 

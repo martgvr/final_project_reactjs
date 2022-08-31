@@ -2,8 +2,8 @@
     color: black;
     margin: 0 auto;
     padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.itemdetail__container h2 {
-    margin-bottom: 10px;
-}
