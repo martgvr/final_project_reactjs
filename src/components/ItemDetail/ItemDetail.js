@@ -7,14 +7,11 @@ import Rating from '@mui/material/Rating';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
 
-// Importo useContext y cartContext
 import React, { useContext, useState } from 'react'
 import { cartContext } from '../../context/cartContext'
 
 function ItemDetail({ id, name, price, stock, img, rating, description }) {
   const [showCartButton, setShowCartButton] = useState(null);
-
-  // Desestructuro el context
   const { addToCart } = useContext(cartContext);
 
   function handleAdd(quantity) {

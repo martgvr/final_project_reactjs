@@ -1,9 +1,7 @@
 import { createContext, useState } from 'react';
 
-// Inicializamos un context
 export const cartContext = createContext();
 
-// Creamos un provider
 export function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
   const cartCopy = [...cart];

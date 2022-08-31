@@ -18,9 +18,7 @@ export default firestoreDB;
 
 export function getData(category) {
   return new Promise((resolve) => {
-    // Referencio a la coleccion
     const collectionRef = collection(firestoreDB, 'products');
-    // Creo una referencia a utilizar como param en getDocs
     const ref = (category == null) ? collectionRef : query(collectionRef, where('category', '==', category));
 
     getDocs(ref).then(snapshot => {
