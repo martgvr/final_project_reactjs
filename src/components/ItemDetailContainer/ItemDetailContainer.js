@@ -14,7 +14,7 @@ function ItemDetailContainer({ title }) {
         getByKey(key).then((res) => setData(res));
     }, [])
 
-    return (data.length == 0) ?
+    return (data.length === 0) ?
         <Loading />
         :
         <div className='itemdetail__container'>

@@ -14,7 +14,7 @@ function ItemListContainer({ title }) {
     getData(category).then((res) => setData(res));
   }, [category])
   
-  return (data.length == 0) ? 
+  return (data.length === 0) ? 
     <Loading />
     :
     <div className='itemlist__container'>
