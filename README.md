@@ -1,4 +1,4 @@
-<div align="center"><img src="https://i.ibb.co/KXqrx4z/logo.jpg" width="400"/>
+<div align="center"><img src="https://i.ibb.co/SPVDXcp/logo1.png" width="400"/>
 
 # E-commerce con React JS</div>
 
