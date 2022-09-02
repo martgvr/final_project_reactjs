@@ -24,7 +24,7 @@ function ItemDetailContainer({ title }) {
 
     useEffect(() => {
         getByKey(key).then((res) => setData(res));
-    }, [])
+    }, [key])
 
     return (data.length === 0) ?
         <Loading />
