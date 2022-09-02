@@ -8,7 +8,7 @@ This e-commerce has been created with React JS using <b>create-react-app</b> and
 ## Other dependencies used:
 - React Router Dom as router.  
 - Formik as form values tracker.
-- AlertifyJS to show alerts
+- AlertifyJS to show alerts.
 - Firebase as database.
 
 # How to clone this repository?
@@ -20,7 +20,7 @@ Then, in the terminal of your choice, go to the directory where you want to clon
 
 - Clone the repo
 ```
-$ git clone <link copied>
+$ git clone <link copied> .
 ```
 
 - Install the dependencies
