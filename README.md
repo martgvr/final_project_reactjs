@@ -12,4 +12,3 @@ La tienda se encuentra realizada con ReactJS utilizando como base <b>create-reac
 
 ## What's next?
 - Usar NavLink en la navbar.
-- Poner logo en jpg en el readme como header
